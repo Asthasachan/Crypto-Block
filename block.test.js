@@ -52,8 +52,10 @@ describe("Block", () => {
       expect(minedBlock.timestamp).not.toEqual(undefined);
     });
 
-    it('createsa HA-256 `hash` based on proper inputs',()=>{
-      expect(minedBlock.hash).toEqual(cryptoHash(minedBlock.timestamp,lastBlock.hash,data));
+    it("createsa HA-256 `hash` based on proper inputs", () => {
+      expect(minedBlock.hash).toEqual(
+        cryptoHash(minedBlock.timestamp, lastBlock.hash, data)
+      );
     });
   });
 });

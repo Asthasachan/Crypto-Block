@@ -1,21 +1,41 @@
-const Blockchain = require('./blockchain');
-const Block = require('./block')
+const Blockchain = require("./blockchain");
+const Block = require("./block");
 
-describe('Blockchain',()=>{
-    const blockchain = new Blockchain();
+describe("Blockchain", () => {
+  const blockchain = new Blockchain();
 
-    it('contains a `chain` Array instance',()=>{
-        expect(blockchain.chain instanceof Array).toBe(true);
+  it("contains a `chain` Array instance", () => {
+    expect(blockchain.chain instanceof Array).toBe(true);
+  });
+
+  it("starts with genesis block", () => {
+    expect(blockchain.chain[0]).toEqual(Block.genesis());
+  });
+
+  it("adds a new block to the chain", () => {
+    const newData = "foo bar";
+    blockchain.addBlock({ data: newData });
+
+    expect(blockchain.chain[blockchain.chain.length - 1].data).toEqual(newData);
+  });
+
+  describe('isValidChain()',()=>{
+    describe('when the chain does not start with genesis block',()=>{
+        it('returns false',()=>{});
     });
 
-    it('starts with genesis block', ()=>{
-        expect(blockchain.chain[0]).toEqual(Block.genesis());
-    });
+    describe('when the chain starts with the genesis block an had multiple blocks',()=>{
+        describe('and a lastHash reference has changed',()=>{
+            it('returns false',()=>{});
+        });
 
-    it('adds a new block to the chain',()=>{
-        const newData = 'foo bar';
-        blockchain.addBlock({data: newData});
+        describe('and the chain containns a block with an invalid field',()=>{
+            it('returns false',()=>{});
+        });
+        describe('and the hain does not contain any inalid blocks',()=>{
+            it('returns true',()=>{});
 
-        expect(blockchain.chain[blockchain.chain.length-1].data).toEqual(newData);
+        });
     });
+  });
 });
